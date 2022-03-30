@@ -119,7 +119,7 @@ class _myRegisterState extends State<myRegister> {
                               ),
                               onPressed: () {
                                 print("New registered !");
-                                FirestoreHelper().Inscription(username, mail, password);
+                                //FirestoreHelper().Inscription(username, mail, password);
                               },
                               child: Row(
                                 mainAxisAlignment:

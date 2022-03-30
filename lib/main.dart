@@ -6,6 +6,7 @@ import 'package:projetfinal_mobile/resetpass.dart';
 void main() {
   runApp(
     MaterialApp(
+      theme: ThemeData(fontFamily: 'Oswald'),
       debugShowCheckedModeBanner: false,
       initialRoute: 'login',
       title: 'OMS',

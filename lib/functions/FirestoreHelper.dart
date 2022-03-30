@@ -57,12 +57,12 @@ class FirestoreHelper {
     String uid = auth.currentUser!.uid;
     return uid;
   }
-
+/*
   Future <Utilisateur> getUtilisateur(String uid) async {
     DocumentSnapshot  snapshot = await fire_user.doc(uid).get();
     return Utilisateur(snapshot);
 
-  }
+  }*/
 
   Future <String> stockageImage(String nameFile,Uint8List datas) async{
     TaskSnapshot snapshot = await fireStorage.ref("image/$nameFile").putData(datas);
