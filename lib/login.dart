@@ -14,7 +14,11 @@ class _myLoginState extends State<myLogin> {
     return SafeArea(
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.lightGreenAccent
+          gradient: LinearGradient(
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              colors: [Colors.orange, Colors.lightGreen]
+          ),
         ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -28,7 +32,7 @@ class _myLoginState extends State<myLogin> {
                       top: 60.0,
                     ),
                     child: Text(
-                      'OMS\n LOGIN',
+                      'LOGIN',
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         color: Colors.white,

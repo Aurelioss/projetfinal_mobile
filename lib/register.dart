@@ -19,7 +19,12 @@ class _myRegisterState extends State<myRegister> {
     return SafeArea(
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.lightGreenAccent
+          //color: Colors.lightGreenAccent
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.purple, Colors.orange]
+          ),
         ),
         child: Scaffold(
           appBar: AppBar(
