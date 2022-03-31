@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:projetfinal_mobile/login.dart';
+import 'package:projetfinal_mobile/functions/customPageRoute.dart';
 import 'package:projetfinal_mobile/functions/FirestoreHelper.dart';
 
 class myRegister extends StatefulWidget {
@@ -162,9 +164,16 @@ class _myRegisterState extends State<myRegister> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextButton(
-                            onPressed: () {
+                            //je veux transition haut vers bas
+                            /*onPressed: () {
                               Navigator.pushNamed(context, 'login');
-                            },
+                            },*/
+                            onPressed: () => Navigator.of(context).push(
+                              CustomPageRoute(
+                                  child: myLogin(),
+                                  direction: AxisDirection.down,
+                              ),
+                            ),
                             child: Text(
                               'Login',
                               style: TextStyle(color: Colors.black),
