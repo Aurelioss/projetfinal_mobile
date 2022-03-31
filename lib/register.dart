@@ -133,7 +133,7 @@ class _myRegisterState extends State<myRegister> {
                                 setState(() => isLoading = true);
                                 await Future.delayed(Duration(seconds: 3));
                                 setState(() => isLoading = false);
-                                //FirestoreHelper().Inscription(username, mail, password);
+                                FirestoreHelper().Inscription(mail, password, username);
                               },
                               //contenu dans le bouton
                               child: Row(
