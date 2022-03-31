@@ -11,6 +11,9 @@ class myLogin extends StatefulWidget {
 }
 
 class _myLoginState extends State<myLogin> {
+
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -86,22 +89,45 @@ class _myLoginState extends State<myLogin> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           ElevatedButton(
+                            //forme
                               style: ElevatedButton.styleFrom(
                                 maximumSize: Size(170.0, 90.0),
                                 minimumSize: Size(170.0, 60.0),
                                 primary: Colors.black,
                                 shape: StadiumBorder(),
                               ),
-                              onPressed: () {},
+                              //action
+                              onPressed: () async {
+                                if (isLoading) return;
+
+                                setState(() => isLoading = true);
+                                await Future.delayed(Duration(seconds: 3));
+                                setState(() => isLoading = false);
+                              },
+                              //contenu
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 //crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text('LOG IN'),
-                                  Icon(
-                                    Icons.lock,
-                                    color: Colors.white,
+                                  isLoading
+                                  ? Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CircularProgressIndicator(color: Colors.white),
+                                      const SizedBox(width: 12),
+                                      Text('Please wait...'),
+                                    ],
+                                  )
+                                  : Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          Icons.content_paste_rounded,
+                                          color: Colors.white,
+                                        ),
+                                        Text('REGISTER'),
+                                      ]
                                   ),
                                 ],
                               )),

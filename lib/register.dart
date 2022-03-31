@@ -151,13 +151,12 @@ class _myRegisterState extends State<myRegister> {
                                         ],
                                       )
                                       : Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
                                         children: [
-                                          Text('REGISTER'),
                                           Icon(
                                             Icons.content_paste_rounded,
                                             color: Colors.white,
-                                      ),
+                                          ),
+                                          Text('REGISTER'),
                                     ]),
 
                                 ],
