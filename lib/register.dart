@@ -13,6 +13,7 @@ class _myRegisterState extends State<myRegister> {
   late String username;
   late String mail = "";
   late String password;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
@@ -116,23 +117,39 @@ class _myRegisterState extends State<myRegister> {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
                           ElevatedButton(
+                            //forme bouton
                               style: ElevatedButton.styleFrom(
                                 maximumSize: const Size(170.0, 90.0),
                                 minimumSize: const Size(170.0, 60.0),
                                 primary: Colors.black,
                                 shape: const StadiumBorder(),
                               ),
-                              onPressed: () {
-                                print("New registered !");
+                              //action bouton
+                              onPressed: () async {
+                                if (isLoading) return;
+
+                                setState(() => isLoading = true);
+                                await Future.delayed(Duration(seconds: 3));
+                                setState(() => isLoading = false);
                                 //FirestoreHelper().Inscription(username, mail, password);
                               },
+                              //contenu dans le bouton
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 //crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                  Text('REGISTER'),
-                                  Icon(
+                                  isLoading
+                                      ? Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          CircularProgressIndicator(color: Colors.white),
+                                          const SizedBox(width: 12),
+                                          Text('Please wait...'),
+                                        ],
+                                      )
+                                      : Text('REGISTER'),
+                                        Icon(
                                     Icons.content_paste_rounded,
                                     color: Colors.white,
                                   ),
