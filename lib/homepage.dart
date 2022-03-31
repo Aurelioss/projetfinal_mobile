@@ -5,6 +5,7 @@ import 'package:projetfinal_mobile/pages/camera_page.dart';
 import 'package:projetfinal_mobile/pages/chat_page.dart';
 import 'package:projetfinal_mobile/pages/status_page.dart';
 
+
 class HomePage extends StatefulWidget {
 
   @override
@@ -30,29 +31,12 @@ class _HomePageState extends State<HomePage>
       appBar: AppBar(
         title: Text("WhatsApp"),
         elevation: 0.7,
-        bottom: TabBar(
-          indicatorColor: Colors.white,
-          tabs: <Widget>[
-            Tab(icon: Icon(Icons.camera_alt)),
-            Tab(text: "CHATS"),
-            Tab(
-              text: "STATUS",
-            ),
-            Tab(
-              text: "CALLS",
-            ),
-          ],
-        ),
         actions: <Widget>[
           Icon(Icons.search),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5.0),
           ),
           Icon(Icons.more_vert)
-        ],
-      ),
-      body: TabBarView(
-        children: <Widget>[
         ],
       ),
       floatingActionButton: showFab

@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projetfinal_mobile/functions/customPageRoute.dart';
+import 'package:projetfinal_mobile/functions/FirestoreHelper.dart';
 import 'package:projetfinal_mobile/register.dart';
+import 'package:projetfinal_mobile/homepage.dart';
+
 
 class myLogin extends StatefulWidget {
   const myLogin({Key? key}) : super(key: key);
@@ -12,6 +15,9 @@ class myLogin extends StatefulWidget {
 
 class _myLoginState extends State<myLogin> {
 
+
+  late String mail = "";
+  late String password;
   bool isLoading = false;
 
   @override
@@ -64,6 +70,9 @@ class _myLoginState extends State<myLogin> {
                             borderRadius: BorderRadius.circular(10.0),
                           ),
                         ),
+                        onChanged: (value) {
+                          mail = value;
+                        },
                       ),
                       SizedBox(height: 30.0),
                       TextFormField(
@@ -82,7 +91,11 @@ class _myLoginState extends State<myLogin> {
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
                           ),
+
                         ),
+                        onChanged: (value) {
+                          password = value;
+                        },
                       ),
                       SizedBox(height: 30.0),
                       Row(
@@ -98,12 +111,27 @@ class _myLoginState extends State<myLogin> {
                               ),
                               //action
                               onPressed: () async {
+
                                 if (isLoading) return;
+                                print("Je me suis connecté");
+                                FirestoreHelper().Connexion(mail, password).then((value){
+                                  print("Connexion réussi");
+
+                                  Navigator.push(context, MaterialPageRoute(
+                                      builder: (context){
+                                        return HomePage();
+                                      }
+                                  ));
+
+                                }).catchError((onError){
+                                  print("Connexion erroné");
+                                });
 
                                 setState(() => isLoading = true);
                                 await Future.delayed(Duration(seconds: 3));
                                 setState(() => isLoading = false);
                               },
+
                               //contenu
                               child: Row(
                                 mainAxisAlignment:
@@ -127,6 +155,7 @@ class _myLoginState extends State<myLogin> {
                                           color: Colors.white,
                                         ),
                                         Text('LOG IN'),
+
                                       ]
                                   ),
                                 ],
