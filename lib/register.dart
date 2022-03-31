@@ -139,7 +139,7 @@ class _myRegisterState extends State<myRegister> {
                               child: Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                //crossAxisAlignment: CrossAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   isLoading
                                       ? Row(
@@ -150,11 +150,16 @@ class _myRegisterState extends State<myRegister> {
                                           Text('Please wait...'),
                                         ],
                                       )
-                                      : Text('REGISTER'),
-                                        Icon(
-                                    Icons.content_paste_rounded,
-                                    color: Colors.white,
-                                  ),
+                                      : Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Text('REGISTER'),
+                                          Icon(
+                                            Icons.content_paste_rounded,
+                                            color: Colors.white,
+                                      ),
+                                    ]),
+
                                 ],
                               )),
                         ],

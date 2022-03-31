@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:projetfinal_mobile/functions/customPageRoute.dart';
+import 'package:projetfinal_mobile/register.dart';
 
 class myLogin extends StatefulWidget {
   const myLogin({Key? key}) : super(key: key);
@@ -54,7 +56,6 @@ class _myLoginState extends State<myLogin> {
                       TextField(
                         decoration: InputDecoration(
                           labelText: 'Email',
-                          fillColor: Colors.grey.shade100,
                           filled: true,
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0),
@@ -73,7 +74,6 @@ class _myLoginState extends State<myLogin> {
                         obscureText: true,
                         decoration: InputDecoration(
                           labelText: 'Password',
-                          fillColor: Colors.grey.shade100,
                           filled: true,
                           // hintText: 'Password',
                           border: OutlineInputBorder(
@@ -112,9 +112,15 @@ class _myLoginState extends State<myLogin> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, 'register');
-                            },
+                            //du bas vers le haut
+                            onPressed: () => Navigator.of(context).push(
+                              CustomPageRoute(
+                                child: myRegister(),
+                                direction: AxisDirection.up,
+                              ),
+                            ),
+                              //Navigator.pushNamed(context, 'register');
+
                             child: Text(
                               'Register',
                               style: TextStyle(color: Colors.black),
