@@ -123,10 +123,10 @@ class _myLoginState extends State<myLogin> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Icon(
-                                          Icons.content_paste_rounded,
+                                          Icons.lock,
                                           color: Colors.white,
                                         ),
-                                        Text('REGISTER'),
+                                        Text('LOG IN'),
                                       ]
                                   ),
                                 ],
