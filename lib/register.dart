@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:projetfinal_mobile/login.dart';
 import 'package:projetfinal_mobile/functions/customPageRoute.dart';
 import 'package:projetfinal_mobile/functions/FirestoreHelper.dart';
+import 'package:flutter_beautiful_popup/main.dart';
 
 class myRegister extends StatefulWidget {
   const myRegister({Key? key}) : super(key: key);
@@ -16,6 +17,20 @@ class _myRegisterState extends State<myRegister> {
   late String mail = "";
   late String password;
   bool isLoading = false;
+
+  Future showPopUp(titlePopUp, description) => showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(titlePopUp),
+        content: Text(description),
+        actions: [
+          TextButton(
+            child: Text('OK'),
+            onPressed: () => Navigator.pop(context, false),
+          ),
+        ],
+      ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -129,11 +144,24 @@ class _myRegisterState extends State<myRegister> {
                               //action bouton
                               onPressed: () async {
                                 if (isLoading) return;
-
                                 setState(() => isLoading = true);
                                 await Future.delayed(Duration(seconds: 3));
                                 setState(() => isLoading = false);
-                                FirestoreHelper().Inscription(mail, password, username);
+
+                                if (password.length < 6) {
+                                  showPopUp('Error', 'Password must get at least 6 characters');
+                                } else {
+                                  if (mail.length == 0){
+                                    showPopUp('Error', 'Invalid mail');
+                                  } else {
+                                    if (username.length == 0){
+                                      showPopUp('Error', 'Invalid username');
+                                    } else {
+                                      FirestoreHelper().Inscription(mail, password, username);
+                                      showPopUp('Succesz', 'Your account as been create succesfully !');
+                                    }
+                                  }
+                                }
                               },
                               //contenu dans le bouton
                               child: Row(
@@ -158,7 +186,6 @@ class _myRegisterState extends State<myRegister> {
                                           ),
                                           Text('REGISTER'),
                                     ]),
-
                                 ],
                               )),
                         ],
