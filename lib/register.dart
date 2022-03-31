@@ -25,8 +25,8 @@ class _myRegisterState extends State<myRegister> {
         content: Text(description),
         actions: [
           TextButton(
-            child: Text('SUBMIT'),
-            onPressed: () {},
+            child: Text('OK'),
+            onPressed: () => Navigator.pop(context, false),
           ),
         ],
       ),
@@ -150,13 +150,17 @@ class _myRegisterState extends State<myRegister> {
 
                                 if (password.length < 6) {
                                   showPopUp('Error', 'Password must get at least 6 characters');
-                                } else if (mail.length == 0){
-                                  showPopUp('Error', 'Invalid mail');
-                                } else if (username.length == 0){
-                                  showPopUp('Error', 'Invalid username');
-                                }
-                                else {
-                                  FirestoreHelper().Inscription(mail, password, username);
+                                } else {
+                                  if (mail.length == 0){
+                                    showPopUp('Error', 'Invalid mail');
+                                  } else {
+                                    if (username.length == 0){
+                                      showPopUp('Error', 'Invalid username');
+                                    } else {
+                                      FirestoreHelper().Inscription(mail, password, username);
+                                      showPopUp('Succesz', 'Your account as been create succesfully !');
+                                    }
+                                  }
                                 }
                               },
                               //contenu dans le bouton
