@@ -6,7 +6,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 class FirestoreHelper {
   //Attributs
   final auth = FirebaseAuth.instance;
-  final fire_user = FirebaseFirestore.instance.collection("Utilisateurs");
+  final fire_user = FirebaseFirestore.instance.collection("Users");
   final fireStorage = FirebaseStorage.instance;
 
 
@@ -23,8 +23,10 @@ class FirestoreHelper {
     User? user = resultat.user;
     String uid = user!.uid;
     Map<String,dynamic>map = {
-      "PSEUDO": username,
-      "MAIL": mail
+      "Pseudo": username,
+      "Email": mail,
+      "Password":password
+
     };
     addUser(uid, map);
 
@@ -42,6 +44,8 @@ class FirestoreHelper {
 
 //Ajouter des utilisateurs
   addUser(String uid,Map<String,dynamic>map){
+    FirebaseFirestore.instance.collection('Users')
+        .add({'Email' : map['Email'], 'Password' : map['Password'], 'Pseudo' : map['Pseudo']});
     fire_user.doc(uid).set(map);
 
   }

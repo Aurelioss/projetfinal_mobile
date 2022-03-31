@@ -3,7 +3,13 @@ import 'package:projetfinal_mobile/login.dart';
 import 'package:projetfinal_mobile/register.dart';
 import 'package:projetfinal_mobile/resetpass.dart';
 
-void main() {
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+void main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
   runApp(
     MaterialApp(
       theme: ThemeData(fontFamily: 'Oswald'),

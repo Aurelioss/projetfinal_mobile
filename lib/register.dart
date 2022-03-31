@@ -134,6 +134,7 @@ class _myRegisterState extends State<myRegister> {
                                 await Future.delayed(Duration(seconds: 3));
                                 setState(() => isLoading = false);
                                 FirestoreHelper().Inscription(mail, password, username);
+                                print("REGISTERED");
                               },
                               //contenu dans le bouton
                               child: Row(
