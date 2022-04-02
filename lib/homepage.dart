@@ -4,6 +4,7 @@ import 'package:projetfinal_mobile/pages/call_page.dart';
 import 'package:projetfinal_mobile/pages/camera_page.dart';
 import 'package:projetfinal_mobile/pages/chat_page.dart';
 import 'package:projetfinal_mobile/pages/status_page.dart';
+import 'pages/chat_page.dart';
 
 const dGreen = Color(0xFF2ac0a6);
 const dWhite = Color(0xFFe8f4f2);
@@ -27,7 +28,6 @@ class _HomePageState extends State<HomePage>
   void initState() {
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -225,12 +225,12 @@ class MessageSection extends StatelessWidget {
         children: messages.map((message) {
           return InkWell(
             onTap: () {
-              /*Navigator.push(
+              Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const ChatPage(),
+                  builder: (context) => Chat_Page(),
                 ),
-              );*/
+              );
             },
             splashColor: dGreen,
             child: Container(
