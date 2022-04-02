@@ -112,16 +112,23 @@ class _myLoginState extends State<myLogin> {
                               //action
                               onPressed: () async {
 
+                                Navigator.of(context).push(
+                                  CustomPageRoute(
+                                    child: HomePage(),
+                                    direction: AxisDirection.up,
+                                  ),
+                                );
+
                                 if (isLoading) return;
                                 print("Je me suis connecté");
                                 FirestoreHelper().Connexion(mail, password).then((value){
                                   print("Connexion réussi");
 
-                                  Navigator.push(context, MaterialPageRoute(
+                                  /*Navigator.push(context, MaterialPageRoute(
                                       builder: (context){
                                         return HomePage();
                                       }
-                                  ));
+                                  ));*/
 
                                 }).catchError((onError){
                                   print("Connexion erroné");

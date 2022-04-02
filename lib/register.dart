@@ -32,6 +32,81 @@ class _myRegisterState extends State<myRegister> {
       ),
   );
 
+  void showAlert() {
+    AlertDialog dialog = new AlertDialog(
+      content: new Container(
+        width: 260,
+        height: 230,
+        decoration: new BoxDecoration(
+          shape: BoxShape.rectangle,
+          color: Colors.white,
+          borderRadius: new BorderRadius.all(new Radius.circular(32)),
+        ),
+        child: new Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            //top
+            new Expanded(
+                child: new Row(
+                  children: <Widget>[
+                    new Container(
+                      decoration: new BoxDecoration(
+                        color: Colors.green,
+                      ),
+                      child: new Text(
+                          'Rate',
+                           style: TextStyle(
+                             color: Colors.black,
+                             fontSize: 18,
+                           ),
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  ],
+                )
+            ),
+            //centre
+            new Expanded(
+                child: new Container(
+                  child: new TextField(
+                    decoration: new InputDecoration(
+                      border: InputBorder.none,
+                      filled: false,
+                      contentPadding: new EdgeInsets.only(
+                        left: 10, top: 10, bottom: 10, right: 10,
+                      ),
+                      hintText: 'add review',
+                      hintStyle: new TextStyle(
+                        color: Colors.grey.shade500,
+                        fontSize: 12,
+                      ),
+                      ),
+                    )),
+                  flex: 2,
+                ),
+              //Bottom
+              new Expanded(
+                child: new Container(
+                  padding: new EdgeInsets.all(16),
+                  decoration: new BoxDecoration(
+                    color: Colors.purple,
+                ),
+                child: new Text(
+                  'Rate prduct',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -143,6 +218,7 @@ class _myRegisterState extends State<myRegister> {
                               ),
                               //action bouton
                               onPressed: () async {
+                                showAlert();
                                 if (isLoading) return;
                                 setState(() => isLoading = true);
                                 await Future.delayed(Duration(seconds: 3));
