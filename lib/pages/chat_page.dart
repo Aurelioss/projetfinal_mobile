@@ -39,6 +39,9 @@ class _Chat_PageState extends State<Chat_Page>
             Navigator.pop(context);
           },
         ),
+        title: Text(
+          'Friend name'
+        ),
         actions: [
           IconButton(
             icon: const Icon(
@@ -159,23 +162,6 @@ class ChatingSection extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 15),
-            Text(
-              "Alla Burda",
-              /*style: GoogleFonts.inter(
-                color: Colors.black87,
-                fontSize: 15,
-                fontWeight: FontWeight.w600,
-              ),*/
-            ),
-            Text(
-              "Was online 56 seconde ago",
-              /*style: GoogleFonts.inter(
-                color: Colors.grey,
-                fontSize: 13,
-                fontWeight: FontWeight.w600,
-              ),*/
-            ),
-            const SizedBox(height: 45),
             TextMessage(
               message: "Months on ye at by esteem",
               date: "17:19",

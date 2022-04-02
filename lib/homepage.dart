@@ -40,24 +40,24 @@ class _HomePageState extends State<HomePage>
           onPressed: () {},
           icon: const Icon(
             Icons.menu,
-            color: dWhite,
+            color: Colors.white,
             size: 30,
           ),
         ),
         actions: [
-          IconButton(
+          IconButton( //bouton recherche
             onPressed: () {},
             icon: const Icon(
               Icons.search_rounded,
-              color: dWhite,
+              color: Colors.white,
               size: 30,
             ),
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton( //boutton pour écrire nouveau message
         onPressed: () {},
-        backgroundColor: dGreen,
+        backgroundColor: Colors.black,
         child: const Icon(
           Icons.edit,
           size: 20,
@@ -98,7 +98,7 @@ class MessageSection extends StatelessWidget {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
-        children: messages.map((message) {
+        children: messages.map((message) { //barres de conversation
           return InkWell(
             onTap: () {
               Navigator.push(
@@ -108,7 +108,7 @@ class MessageSection extends StatelessWidget {
                 ),
               );
             },
-            splashColor: dGreen,
+            splashColor: Colors.blue,
             child: Container(
               padding: const EdgeInsets.only(left: 30, right: 10, top: 15),
               child: Row(
@@ -119,6 +119,7 @@ class MessageSection extends StatelessWidget {
                     height: 62,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
+                      color: Colors.green,
                       image: DecorationImage(
                         image: AssetImage(message['senderProfile']),
                         fit: BoxFit.cover,
@@ -170,11 +171,6 @@ class MessageSection extends StatelessWidget {
                                   ),
                                   child: Text(
                                     message['unRead'].toString(),
-                                    /*style: GoogleFonts.inter(
-                                      color: Colors.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w500,
-                                    ),*/
                                   ),
                                 )
                                     : Container(),
