@@ -1,10 +1,8 @@
-import 'package:camera/camera.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:projetfinal_mobile/pages/call_page.dart';
-import 'package:projetfinal_mobile/pages/camera_page.dart';
-import 'package:projetfinal_mobile/pages/chat_page.dart';
-import 'package:projetfinal_mobile/pages/status_page.dart';
-import 'pages/chat_page.dart';
+import 'package:projetfinal_mobile/pages/chat/chat_page.dart';
+import 'pages/chat/chat_page.dart';
+
 
 const dGreen = Color(0xFF2ac0a6);
 const dWhite = Color(0xFFe8f4f2);
@@ -77,7 +75,67 @@ class _HomePageState extends State<HomePage>
 
 class MessageSection extends StatelessWidget {
   MessageSection({Key? key}) : super(key: key);
-  final List messages = [
+
+  final Stream<QuerySnapshot> _usersStream =
+  FirebaseFirestore.instance.collection('Users').snapshots();
+
+  /*@override
+  Widget build(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: _usersStream,
+      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+        if (snapshot.hasError) {
+          return Text('Something went wrong');
+        }
+
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Text("Loading");
+        }
+
+        return SingleChildScrollView(
+          child: Column(
+          children: snapshot.data!.docs.map((DocumentSnapshot document) {
+            Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
+            return InkWell(
+            onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Chat_Page(),
+                  ),
+                );
+              },
+              splashColor: Colors.blue,
+              child: Container(
+                padding: const EdgeInsets.only(
+                    left: 30, right: 10, top: 15),
+                child: Row(
+                    children: [
+                Container(
+                margin: const EdgeInsets.only(right: 23),
+                width: 62,
+                height: 62,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.green,
+                  image: DecorationImage(
+                    image: AssetImage(data['Profile']),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+              )
+            );
+          }).toList(),
+
+
+        ),
+        );
+      },
+    );
+  }*/
+
+  /*final List messages = [
     {
       'senderProfile': 'images/avatar/a2.jpg',
       'senderName': 'Lara',
@@ -92,106 +150,130 @@ class MessageSection extends StatelessWidget {
       'unRead': 3,
       'date': '07:31',
     },
-  ];
+  ];*/
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: messages.map((message) { //barres de conversation
-          return InkWell(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => Chat_Page(),
-                ),
-              );
-            },
-            splashColor: Colors.blue,
-            child: Container(
-              padding: const EdgeInsets.only(left: 30, right: 10, top: 15),
-              child: Row(
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(right: 23),
-                    width: 62,
-                    height: 62,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.green,
-                      image: DecorationImage(
-                        image: AssetImage(message['senderProfile']),
-                        fit: BoxFit.cover,
+    print('building');
+    return StreamBuilder<QuerySnapshot>(
+        stream: _usersStream,
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Text('Something went wrong');
+          }
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Text("Loading");
+          }
+
+
+          return SingleChildScrollView(
+            child: Column(
+              children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                Map<String, dynamic> data = document.data()! as Map<
+                    String,
+                    dynamic>;
+                return InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Chat_Page(),
                       ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Column(
+                    );
+                  },
+                  splashColor: Colors.blue,
+                  child: Container(
+                    padding: const EdgeInsets.only(
+                        left: 30, right: 10, top: 15),
+                    child: Row(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Container(
-                              margin: const EdgeInsets.only(top: 25),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
+                        Container(
+                          margin: const EdgeInsets.only(right: 23),
+                          width: 62,
+                          height: 62,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.green,
+                            image: DecorationImage(
+                              image: AssetImage(/*data['Profile']*/'lib/assets/login.png'),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment
+                                    .spaceBetween,
                                 children: [
-                                  Text(
-                                    message['senderName'],
-                                    /*style: GoogleFonts.inter(
+                                  Container(
+                                    margin: const EdgeInsets.only(top: 25),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment
+                                          .start,
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .center,
+                                      children: [
+                                        Text(
+                                          data['Pseudo'],
+                                          /*style: GoogleFonts.inter(
                                       color: Colors.grey,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
                                     ),*/
-                                  ),
-                                  Wrap(children: [
-                                    Text(
-                                      message['message'],
-                                      /*style: GoogleFonts.inter(
+                                        ),
+                                        Wrap(children: [
+                                          Text(
+                                            //data['LastMessage'],
+                                            'Hello! how are you',
+                                            /*style: GoogleFonts.inter(
                                         color: Colors.black87,
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
                                       ),*/
+                                          ),
+                                        ]),
+                                      ],
                                     ),
-                                  ]),
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(/*message['date']*/
+                                          'lastMessage date toString'),
+                                      /*message['unRead']*/ 1 != 0
+                                          ? Container(
+                                        padding: const EdgeInsets.all(5),
+                                        decoration: const BoxDecoration(
+                                          color: dGreen,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        child: Text(
+                                          /*message['unRead'].toString()*/
+                                          'unread messageNbr',
+                                        ),
+                                      )
+                                          : Container(),
+                                    ],
+                                  ),
                                 ],
                               ),
-                            ),
-                            Column(
-                              children: [
-                                Text(message['date']),
-                                message['unRead'] != 0
-                                    ? Container(
-                                  padding: const EdgeInsets.all(5),
-                                  decoration: const BoxDecoration(
-                                    color: dGreen,
-                                    shape: BoxShape.circle,
-                                  ),
-                                  child: Text(
-                                    message['unRead'].toString(),
-                                  ),
-                                )
-                                    : Container(),
-                              ],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 20),
-                        Container(
-                          color: Colors.grey[400],
-                          height: 0.5,
+                              const SizedBox(height: 20),
+                              Container(
+                                color: Colors.grey[400],
+                                height: 0.5,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
+                );
+              }).toList(),
             ),
           );
-        }).toList(),
-      ),
-    );
+        });
   }
 }
