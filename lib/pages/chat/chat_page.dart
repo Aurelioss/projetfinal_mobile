@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Chat_Page extends StatefulWidget {
-
+  /*String Chatuid = "";
+  Chat_Page({required this.Chatuid});*/
   @override
   _Chat_PageState createState() => _Chat_PageState();
 }
