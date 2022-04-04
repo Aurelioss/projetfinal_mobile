@@ -79,82 +79,12 @@ class MessageSection extends StatelessWidget {
   final Stream<QuerySnapshot> _usersStream =
   FirebaseFirestore.instance.collection('Users').snapshots();
 
-  /*@override
-  Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
-      stream: _usersStream,
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Text('Something went wrong');
-        }
-
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Text("Loading");
-        }
-
-        return SingleChildScrollView(
-          child: Column(
-          children: snapshot.data!.docs.map((DocumentSnapshot document) {
-            Map<String, dynamic> data = document.data()! as Map<String, dynamic>;
-            return InkWell(
-            onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Chat_Page(),
-                  ),
-                );
-              },
-              splashColor: Colors.blue,
-              child: Container(
-                padding: const EdgeInsets.only(
-                    left: 30, right: 10, top: 15),
-                child: Row(
-                    children: [
-                Container(
-                margin: const EdgeInsets.only(right: 23),
-                width: 62,
-                height: 62,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.green,
-                  image: DecorationImage(
-                    image: AssetImage(data['Profile']),
-                    fit: BoxFit.cover,
-                  ),
-                ),
-              ),
-              )
-            );
-          }).toList(),
-
-
-        ),
-        );
-      },
-    );
-  }*/
-
-  /*final List messages = [
-    {
-      'senderProfile': 'images/avatar/a2.jpg',
-      'senderName': 'Lara',
-      'message': 'Hello! how are you',
-      'unRead': 0,
-      'date': '16:35',
-    },
-    {
-      'senderProfile': 'images/avatar/a7.jpg',
-      'senderName': 'Stive',
-      'message': 'Hello! how are you',
-      'unRead': 3,
-      'date': '07:31',
-    },
-  ];*/
 
   @override
   Widget build(BuildContext context) {
-    print('building');
+
+    // stream builder pour récup les données de tout les users
+    // et boucler pour chaque user
     return StreamBuilder<QuerySnapshot>(
         stream: _usersStream,
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -170,6 +100,9 @@ class MessageSection extends StatelessWidget {
           return SingleChildScrollView(
             child: Column(
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
+
+                // on recup la snapshot (les infos des users) et on boucle dessus
+                // j'ai l'impression que le .toList() a la fin fait la boucle
                 Map<String, dynamic> data = document.data()! as Map<
                     String,
                     dynamic>;
@@ -178,6 +111,13 @@ class MessageSection extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
+                        // faut changer chat_page pour qu'il accepte en argument
+                        // l'uid de la conv sur laquelle on a cliqué
+                        /*
+                        faut aussi créé une collection 'conversation' dans firebase
+                        on changera l'ui de la conversation celon le nombre de personne dans la discussion
+                        genre https://www.youtube.com/watch?v=fapqK4NqTOc vers 9:34
+                         */
                         builder: (context) => Chat_Page(),
                       ),
                     );
