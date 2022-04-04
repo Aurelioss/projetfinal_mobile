@@ -1,11 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:projetfinal_mobile/pages/chat/chat_page.dart';
+import 'functions/customPageRoute.dart';
 import 'pages/chat/chat_page.dart';
 
-
-const dGreen = Color(0xFF2ac0a6);
-const dWhite = Color(0xFFe8f4f2);
 const dBlack = Color(0xFF34322f);
 
 class HomePage extends StatefulWidget {
@@ -21,6 +20,7 @@ class _HomePageState extends State<HomePage>
 //this will be used to detect when to show our FAB
   bool showFab = true;
   bool isCallsPage = false;
+  final TextEditingController clearTxt = new TextEditingController();
 
   @override
   void initState() {
@@ -30,7 +30,31 @@ class _HomePageState extends State<HomePage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar( //App bar at top
+      appBar: AppBar( //A
+        title: Container(
+          width: double.infinity,
+          height: 40,
+          decoration: BoxDecoration(
+              color: Colors.white, borderRadius: BorderRadius.circular(5)),
+          child: Center(
+            child: TextField(
+              decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search),
+                  suffixIcon: IconButton(
+                    icon: Icon(Icons.clear),
+                    color: dBlack,
+                    onPressed: () {
+                      clearTxt.clear();
+                      /* Clear the search field */
+                    },
+                  ),
+                  hintText: 'Search...',
+                  border: InputBorder.none),
+            ),
+          ),
+        ),
+
+        // pp bar at top
         elevation: 0,
         backgroundColor: dBlack,
 
@@ -44,12 +68,12 @@ class _HomePageState extends State<HomePage>
         ),
         actions: [
           IconButton( //bouton recherche
-            onPressed: () {},
             icon: const Icon(
               Icons.search_rounded,
               color: Colors.white,
               size: 30,
             ),
+            onPressed: () {  },
           ),
         ],
       ),
@@ -256,6 +280,7 @@ class MessageSection extends StatelessWidget {
                                       )
                                           : Container(),
                                     ],
+
                                   ),
                                 ],
                               ),
