@@ -4,7 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:projetfinal_mobile/pages/chat/chat_page.dart';
 import 'functions/customPageRoute.dart';
 import 'pages/chat/chat_page.dart';
-
+import 'package:projetfinal_mobile/models/user.dart';
+import 'package:provider/provider.dart';
 const dBlack = Color(0xFF34322f);
 
 class HomePage extends StatefulWidget {
@@ -262,6 +263,43 @@ class MessageSection extends StatelessWidget {
                                       ],
                                     ),
                                   ),
+                                  Column(
+                                    children: [
+                                      Text(/*message['date']*/
+                                          'LoveCoin'),
+                                      /*message['unRead']*/ 1 != 0
+                                          ? Container(
+                                        padding: const EdgeInsets.all(5),
+                                        decoration: const BoxDecoration(
+                                          color: dGreen,
+                                          shape: BoxShape.rectangle,
+                                        ),
+
+                                      )
+                                          : Container(),
+                                    ],
+                                  ),
+                                  /*StreamBuilder<AppUserData>(
+                                    stream: database.user,
+                                    builder: (context, snapshot) {
+                                      if (snapshot.hasData) {
+                                        AppUserData? userData = snapshot.data;
+                                        if (userData == null) return Text('Loading'); //Loading();
+                                        return TextButton.icon(
+                                          icon: Icon(
+                                            Icons.wine_bar,
+                                            color: Colors.white,
+                                          ),
+                                          label: Text('Love', style: TextStyle(color: Colors.white)),
+                                          onPressed: () async {
+                                            await database.saveUser(data['Pseudo'], userData.MsgCoin + 1);
+                                          },
+                                        );
+                                      } else {
+                                        return Text('Loading');//Loading();
+                                      }
+                                    },
+                                  ),*/
                                   Column(
                                     children: [
                                       Text(/*message['date']*/

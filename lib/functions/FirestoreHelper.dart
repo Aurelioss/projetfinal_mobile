@@ -2,6 +2,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:projetfinal_mobile/models/utilisateur.dart';
 
 class FirestoreHelper {
   //Attributs
@@ -46,7 +47,7 @@ class FirestoreHelper {
   addUser(String uid,Map<String,dynamic>map){
     FirebaseFirestore.instance.collection('Users')
         .add({'Email' : map['Email'], 'Password' : map['Password'], 'Pseudo' : map['Pseudo']});
-    fire_user.doc(uid).set(map);
+    //fire_user.doc(uid).set(map);
 
   }
 
@@ -60,12 +61,12 @@ class FirestoreHelper {
     String uid = auth.currentUser!.uid;
     return uid;
   }
-/*
+
   Future <Utilisateur> getUtilisateur(String uid) async {
     DocumentSnapshot  snapshot = await fire_user.doc(uid).get();
     return Utilisateur(snapshot);
 
-  }*/
+  }
 
   Future <String> stockageImage(String nameFile,Uint8List datas) async{
     TaskSnapshot snapshot = await fireStorage.ref("image/$nameFile").putData(datas);
