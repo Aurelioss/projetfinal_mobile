@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:projetfinal_mobile/login.dart';
 import 'package:projetfinal_mobile/functions/customPageRoute.dart';
 import 'package:projetfinal_mobile/functions/FirestoreHelper.dart';
-import 'package:flutter_beautiful_popup/main.dart';
 
 class myRegister extends StatefulWidget {
   const myRegister({Key? key}) : super(key: key);

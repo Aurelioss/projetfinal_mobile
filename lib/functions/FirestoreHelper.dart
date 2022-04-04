@@ -54,7 +54,6 @@ class FirestoreHelper {
 //Modifier les informations d'un utilisateur
   updatedUser(String uid,Map<String,dynamic>map){
     fire_user.doc(uid).update(map);
-
   }
 
   Future <String> getIdentifiant() async{
@@ -72,9 +71,12 @@ class FirestoreHelper {
     TaskSnapshot snapshot = await fireStorage.ref("image/$nameFile").putData(datas);
     String urlChemin = await snapshot.ref.getDownloadURL();
     return urlChemin;
-
-
   }
+
+  /*Future <String> searchUser(String name, Map<String, dynamic>map) async {
+    String urlChemin = await snapshot.ref.getDownloadURL();
+    return urlChemin;
+  }*/
 
 
 
