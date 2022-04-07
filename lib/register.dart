@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:projetfinal_mobile/login.dart';
 import 'package:projetfinal_mobile/functions/customPageRoute.dart';
-import 'package:projetfinal_mobile/functions/FirestoreHelper.dart';
+import 'package:projetfinal_mobile/services/FirestoreHelper.dart';
 
+/*
 class myRegister extends StatefulWidget {
   const myRegister({Key? key}) : super(key: key);
 
@@ -307,3 +308,4 @@ class _myRegisterState extends State<myRegister> {
     );
   }
 }
+*/

@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:projetfinal_mobile/models/chat_params.dart';
+import 'package:projetfinal_mobile/common/loading.dart';
+import 'package:projetfinal_mobile/services/message_database.dart';
+import 'package:projetfinal_mobile/models/message.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 
 class Chat_Page extends StatefulWidget {
-  /*String Chatuid = "";
-  Chat_Page({required this.Chatuid});*/
+
+  // chat_Page a besoin de l'uid du chat
+  const Chat_Page({Key? key, required this.chatParams}) : super(key: key);
+  final ChatParams chatParams;
+
   @override
-  _Chat_PageState createState() => _Chat_PageState();
+  _Chat_PageState createState() => _Chat_PageState(chatParams);
 }
 
 const dGreen = Color(0xFF2ac0a6);
@@ -19,46 +28,125 @@ class _Chat_PageState extends State<Chat_Page>
   bool showFab = true;
   bool isCallsPage = false;
 
+  final MessageDatabaseService messageService = MessageDatabaseService();
+  _Chat_PageState(this.chatParams);
+
+  final ChatParams chatParams;
+
+  final TextEditingController textEditingController = TextEditingController();
+  final ScrollController listScrollController = ScrollController();
+
+  int _nbElement = 20;
+  static const int PAGINATION_INCREMENT = 20;
+  bool isLoading = false;
+
   @override
   void initState() {
     super.initState();
+    listScrollController.addListener(_scrollListener);
+  }
+
+  _scrollListener() {
+    if (listScrollController.offset >= listScrollController.position.maxScrollExtent &&
+        !listScrollController.position.outOfRange) {
+      setState(() {
+        _nbElement += PAGINATION_INCREMENT;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: dBlack,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.white,
-            size: 23,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+    return Stack(
+      children: [
+        Column(
+          children: [
+            buildListMessage(),
+            buildInput()
+          ],
         ),
-        title: Text(
-          'Friend name'
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.more_vert,
-              color: Colors.white,
-              size: 23,
+        isLoading ? Loading() : Container()
+      ],
+    );
+  }
+
+  Widget buildListMessage() {
+    return Container();
+  }
+
+  // Textfield ou l'on va écrire notre message avant de l'envoyer
+  Widget buildInput() {
+    return Container(
+      width: double.infinity,
+      height: 50.0,
+      decoration: BoxDecoration(border: Border(top: BorderSide(color: Colors.black, width: 0.5)), color: Colors.white),
+      child: Row(
+        children: [
+          Material(
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 1.0),
+              child: IconButton(
+                icon: Icon(Icons.image),
+                onPressed: getImage,
+                color: Colors.blueGrey,
+              ),
             ),
-            onPressed: () {},
+            color: Colors.white,
+          ),
+          Flexible(
+            child: TextField(
+              onSubmitted: (value) {
+                onSendMessage(textEditingController.text, 0);
+              },
+              style: TextStyle(color: Colors.blueGrey, fontSize: 15.0),
+              controller: textEditingController,
+              decoration: InputDecoration.collapsed(
+                hintText: 'Your message...',
+                hintStyle: TextStyle(color: Colors.grey),
+              ),
+            ),
+          ),
+          // Button send message
+          Material(
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 8.0),
+              child: IconButton(
+                icon: Icon(Icons.send),
+                onPressed: () => onSendMessage(textEditingController.text, 0),
+                color: Colors.blueGrey,
+              ),
+            ),
+            color: Colors.white,
           ),
         ],
       ),
-      body: ChatingSection(),
     );
   }
-}
 
+  Future getImage() async {
+    // TODO get and send image
+  }
+
+  void onSendMessage(String content, int type) {
+    if (content.trim() != '') {
+      messageService.onSendMessage(
+          chatParams.getChatGroupId(),
+          Message(
+              idFrom: chatParams.userUid,
+              idTo: chatParams.peer.uid,
+              timestamp: DateTime.now().millisecondsSinceEpoch.toString(),
+              content: content,
+              type: type));
+      listScrollController.animateTo(0.0,
+          duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+      textEditingController.clear();
+    } else {
+      Fluttertoast.showToast(
+          msg: 'Nothing to send', backgroundColor: Colors.red, textColor: Colors.white);
+    }
+  }
+}
+/*
 class BottomSection extends StatelessWidget {
   const BottomSection({Key? key}) : super(key: key);
   @override
@@ -141,7 +229,10 @@ class BottomSection extends StatelessWidget {
     );
   }
 }
+*/
 
+
+/*
 class ChatingSection extends StatelessWidget {
   final String senderProfile = 'images/avatar/a3.jpg';
   final String receiverProfile = 'images/avatar/a6.jpg';
@@ -232,6 +323,7 @@ class ChatingSection extends StatelessWidget {
     );
   }
 }
+*/
 
 class TextMessage extends StatelessWidget {
   final String message, date, senderProfile;
