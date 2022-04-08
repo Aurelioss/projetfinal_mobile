@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+/*import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:projetfinal_mobile/functions/customPageRoute.dart';
 import 'package:projetfinal_mobile/services/FirestoreHelper.dart';
@@ -191,3 +191,5 @@ class _LoginState extends State<Login> {
     );
   }
 }
+
+ */

@@ -1,12 +1,14 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+/*
 import 'package:projetfinal_mobile/pages/chat/chat_page.dart';
 import 'package:projetfinal_mobile/services/FirestoreHelper.dart';
 import 'pages/chat/chat_page.dart';
 import 'pages/splashscreen_wrapper.dart';
 const dBlack = Color(0xFF34322f);
 
-/*class HomePage extends StatefulWidget {
+class HomePage extends StatefulWidget {
 
   @override
   _HomePageState createState() => _HomePageState();
