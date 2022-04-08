@@ -3,15 +3,16 @@ import 'package:projetfinal_mobile/login.dart';
 import 'package:projetfinal_mobile/functions/customPageRoute.dart';
 import 'package:projetfinal_mobile/services/FirestoreHelper.dart';
 
-/*
-class myRegister extends StatefulWidget {
-  const myRegister({Key? key}) : super(key: key);
+class Register extends StatefulWidget {
+  const Register({Key? key}) : super(key: key);
 
   @override
-  _myRegisterState createState() => _myRegisterState();
+  _RegisterState createState() => _RegisterState();
 }
 
-class _myRegisterState extends State<myRegister> {
+class _RegisterState extends State<Register> {
+
+  final FirestoreHelper _auth = FirestoreHelper();
 
   late String username;
   late String mail = "";
@@ -233,7 +234,7 @@ class _myRegisterState extends State<myRegister> {
                                     if (username.length == 0){
                                       showPopUp('Error', 'Invalid username');
                                     } else {
-                                      FirestoreHelper().Inscription(mail, password, username);
+                                      FirestoreHelper().registerWithEmailAndPassword(mail, password, username);
                                       showPopUp('Succesz', 'Your account as been create succesfully !');
                                     }
                                   }
@@ -277,7 +278,7 @@ class _myRegisterState extends State<myRegister> {
                             },*/
                             onPressed: () => Navigator.of(context).push(
                               CustomPageRoute(
-                                  child: myLogin(),
+                                  child: Login(),
                                   direction: AxisDirection.down,
                               ),
                             ),
@@ -308,4 +309,3 @@ class _myRegisterState extends State<myRegister> {
     );
   }
 }
-*/

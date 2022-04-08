@@ -5,16 +5,18 @@ import 'package:projetfinal_mobile/services/FirestoreHelper.dart';
 import 'package:projetfinal_mobile/register.dart';
 import 'package:projetfinal_mobile/homepage.dart';
 
-/*
-class myLogin extends StatefulWidget {
-  const myLogin({Key? key}) : super(key: key);
+
+class Login extends StatefulWidget {
+  const Login({Key? key}) : super(key: key);
 
   @override
-  _myLoginState createState() => _myLoginState();
+  _LoginState createState() => _LoginState();
 }
 
-class _myLoginState extends State<myLogin> {
+class _LoginState extends State<Login> {
 
+
+  final FirestoreHelper _auth = FirestoreHelper();
 
   late String mail = "";
   late String password;
@@ -112,20 +114,7 @@ class _myLoginState extends State<myLogin> {
                               //action
                               onPressed: () async {
                                 if (isLoading) return;
-                                print("Je me suis connecté");
-                                FirestoreHelper().Connexion(mail, password).then((value){
-                                  print("Connexion réussi");
-
-                                  Navigator.of(context).push(
-                                    CustomPageRoute(
-                                      child: HomePage(),
-                                      direction: AxisDirection.up,
-                                    ),
-                                  );
-                                }).catchError((onError){
-                                  print("Connexion erroné");
-                                });
-
+                                await _auth.signIn(mail, password);
                                 setState(() => isLoading = true);
                                 await Future.delayed(Duration(seconds: 3));
                                 setState(() => isLoading = false);
@@ -169,7 +158,7 @@ class _myLoginState extends State<myLogin> {
                             //du bas vers le haut
                             onPressed: () => Navigator.of(context).push(
                               CustomPageRoute(
-                                child: myRegister(),
+                                child: Register(),
                                 direction: AxisDirection.up,
                               ),
                             ),
@@ -202,4 +191,3 @@ class _myLoginState extends State<myLogin> {
     );
   }
 }
- */

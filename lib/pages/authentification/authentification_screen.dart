@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:projetfinal_mobile/common/constants.dart';
 import 'package:projetfinal_mobile/common/loading.dart';
 import 'package:projetfinal_mobile/services/FirestoreHelper.dart';
+import 'package:projetfinal_mobile/login.dart';
+import 'package:projetfinal_mobile/register.dart';
 
 class AuthentificationScreen extends StatefulWidget {
   @override
@@ -44,7 +46,7 @@ class _AuthentificationScreenState extends State<AuthentificationScreen> {
   Widget build(BuildContext context) {
     return loading
         ? Loading()
-        : Scaffold(
+        : /*showSignIn? Login() : */Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
@@ -128,5 +130,6 @@ class _AuthentificationScreenState extends State<AuthentificationScreen> {
       ),
     );
   }
+
 
 }
