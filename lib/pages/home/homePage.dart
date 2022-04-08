@@ -35,7 +35,7 @@ class HomePage extends StatelessWidget {
                       Icons.wine_bar,
                       color: Colors.white,
                     ),
-                    label: Text('drink', style: TextStyle(color: Colors.white)),
+                    label: Text('create love', style: TextStyle(color: Colors.white)),
                     onPressed: () async {
                       await database.saveUser(userData.name, userData.MsgCoin + 1);
                     },

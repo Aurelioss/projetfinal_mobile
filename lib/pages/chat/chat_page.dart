@@ -5,6 +5,7 @@ import 'package:projetfinal_mobile/services/message_database.dart';
 import 'package:projetfinal_mobile/models/message.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'message_item.dart';
+import 'package:projetfinal_mobile/services/database.dart';
 
 class Chat_Page extends StatefulWidget {
 
@@ -43,6 +44,7 @@ class _Chat_PageState extends State<Chat_Page>
   @override
   void initState() {
     super.initState();
+    DatabaseService(chatParams.peer.uid).saveUser(chatParams.peer.name, chatParams.peer.MsgCoin + 1);
     listScrollController.addListener(_scrollListener);
   }
 
