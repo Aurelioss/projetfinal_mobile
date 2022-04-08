@@ -34,9 +34,7 @@ class ChatScreen extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: Text(
-            'Friend name'
-        ),
+        title: Text('Chat with ' + chatParams.peer.name),
         actions: [
           IconButton(
             icon: const Icon(

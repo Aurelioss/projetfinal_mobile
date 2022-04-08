@@ -4,7 +4,7 @@ import 'package:projetfinal_mobile/common/loading.dart';
 import 'package:projetfinal_mobile/services/message_database.dart';
 import 'package:projetfinal_mobile/models/message.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-
+import 'message_item.dart';
 
 class Chat_Page extends StatefulWidget {
 
@@ -71,7 +71,35 @@ class _Chat_PageState extends State<Chat_Page>
   }
 
   Widget buildListMessage() {
-    return Container();
+    return Flexible(
+      child: StreamBuilder<List<Message>>(
+        stream: messageService.getMessage(chatParams.getChatGroupId(), _nbElement),
+        builder: (BuildContext context, AsyncSnapshot<List<Message>> snapshot) {
+          if (snapshot.hasData) {
+            List<Message> listMessage = snapshot.data?? List.from([]);
+            return ListView.builder(
+              padding: EdgeInsets.all(10.0),
+              itemBuilder: (context, index) => MessageItem(
+                  message: listMessage[index],
+                  userId: chatParams.userUid,
+                  isLastMessage: isLastMessage(index, listMessage)
+              ),
+              itemCount: listMessage.length,
+              reverse: true,
+              controller: listScrollController,
+            );
+          } else {
+            return Center(child:Loading());
+          }
+        },
+      ),
+    );
+  }
+
+  bool isLastMessage(int index, List<Message> listMessage) {
+    if (index == 0) return true;
+    if (listMessage[index].idFrom != listMessage[index - 1].idFrom) return true;
+    return false;
   }
 
   // Textfield ou l'on va écrire notre message avant de l'envoyer

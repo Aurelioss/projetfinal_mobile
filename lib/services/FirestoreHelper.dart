@@ -22,7 +22,7 @@ class FirestoreHelper {
   Future signIn(String mail,String password) async {
 
     try {
-      UserCredential resultat = await _auth.createUserWithEmailAndPassword(email: mail, password: password);
+      UserCredential resultat = await _auth.signInWithEmailAndPassword(email: mail, password: password);
       User? user = resultat.user;
       return _userFromFirebaseUser(user);
     } catch(exception){

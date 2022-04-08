@@ -49,7 +49,7 @@ class _AuthentificationScreenState extends State<AuthentificationScreen> {
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
         elevation: 0.0,
-        title: Text(showSignIn ? 'Sign in to Water Social' : 'Register to Water Social'),
+        title: Text(showSignIn ? 'Sign in to Social Lover' : 'Register to Social Lover'),
         actions: <Widget>[
           TextButton.icon(
             icon: Icon(
